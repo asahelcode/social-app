@@ -7,7 +7,6 @@ import {
   AtUri,
   RichText as RichTextAPI,
 } from '@atproto/api'
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
@@ -36,6 +35,7 @@ import {ArrowOutOfBox_Stroke2_Corner0_Rounded as Share} from '#/components/icons
 import {BubbleQuestion_Stroke2_Corner0_Rounded as Translate} from '#/components/icons/Bubble'
 import {Clipboard_Stroke2_Corner2_Rounded as ClipboardIcon} from '#/components/icons/Clipboard'
 import {CodeBrackets_Stroke2_Corner0_Rounded as CodeBrackets} from '#/components/icons/CodeBrackets'
+import {DotGrid_Stroke2_Corner0_Rounded as DotsHorizontal} from '#/components/icons/DotGrid'
 import {EyeSlash_Stroke2_Corner0_Rounded as EyeSlash} from '#/components/icons/EyeSlash'
 import {Filter_Stroke2_Corner0_Rounded as Filter} from '#/components/icons/Filter'
 import {Mute_Stroke2_Corner0_Rounded as Mute} from '#/components/icons/Mute'
@@ -202,10 +202,8 @@ let PostDropdownBtn = ({
                     alf.atoms.bg_contrast_50,
                   ],
                 ]}>
-                <FontAwesomeIcon
-                  icon="ellipsis"
-                  size={20}
-                  color={defaultCtrlColor}
+                <DotsHorizontal
+                  fill={defaultCtrlColor}
                   style={{pointerEvents: 'none'}}
                 />
               </Pressable>
