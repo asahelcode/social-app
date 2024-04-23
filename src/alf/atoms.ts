@@ -840,4 +840,22 @@ export const atoms = {
   mr_auto: {
     marginRight: 'auto',
   },
+  /*
+   * Pointer events & user select
+   */
+  pointer_events_none: {
+    pointerEvents: 'none',
+  },
+  pointer_events_auto: {
+    pointerEvents: 'auto',
+  },
+  user_select_none: {
+    userSelect: 'none',
+  },
+  user_select_text: {
+    userSelect: 'text',
+  },
+  user_select_all: {
+    userSelect: 'all',
+  },
 } as const

@@ -185,7 +185,12 @@ let PostCtrls = ({
             height={big ? 22 : 18}
           />
           {typeof post.replyCount !== 'undefined' && post.replyCount > 0 ? (
-            <Text style={[defaultCtrlColor, big ? a.text_md : {fontSize: 15}]}>
+            <Text
+              style={[
+                defaultCtrlColor,
+                big ? a.text_md : {fontSize: 15},
+                a.user_select_none,
+              ]}>
               {post.replyCount}
             </Text>
           ) : undefined}
@@ -224,6 +229,7 @@ let PostCtrls = ({
               style={[
                 [
                   big ? a.text_md : {fontSize: 15},
+                  a.user_select_none,
                   post.viewer?.like
                     ? [a.font_bold, s.likeColor]
                     : defaultCtrlColor,
