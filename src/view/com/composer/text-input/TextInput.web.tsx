@@ -18,10 +18,7 @@ import {usePalette} from '#/lib/hooks/usePalette'
 import {useActorAutocompleteFn} from '#/state/queries/actor-autocomplete'
 import {useColorSchemeStyle} from 'lib/hooks/useColorSchemeStyle'
 import {blobToDataUri, isUriImage} from 'lib/media/util'
-import {
-  addLinkCardIfNecessary,
-  findIndexInText,
-} from 'view/com/composer/text-input/text-input-util'
+import {addLinkCardIfNecessary} from 'view/com/composer/text-input/text-input-util'
 import {Portal} from '#/components/Portal'
 import {Text} from '../../util/text/Text'
 import {createSuggestion} from './web/Autocomplete'
@@ -192,10 +189,12 @@ export const TextInput = React.forwardRef(function TextInputImpl(
         newRt.detectFacetsWithoutResolution()
         setRichText(newRt)
 
+        const seenUris = new Set()
         if (newRt.facets) {
           for (const facet of newRt.facets) {
             for (const feature of facet.features) {
               if (AppBskyRichtextFacet.isLink(feature)) {
+                seenUris.add(feature.uri)
                 addLinkCardIfNecessary({
                   uri: feature.uri,
                   textBeforeCursor: editorJsonToText(
@@ -215,7 +214,7 @@ export const TextInput = React.forwardRef(function TextInputImpl(
         }
 
         for (const uri of prevAddedLinks.current.keys()) {
-          if (findIndexInText(uri, newText) === -1) {
+          if (!seenUris.has(uri)) {
             prevAddedLinks.current.delete(uri)
           }
         }

@@ -44,21 +44,3 @@ function isValidUrlAndDomain(value: string) {
     value,
   )
 }
-
-// https://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
-// question credit https://stackoverflow.com/users/169992/lance
-// answer credit bobince https://stackoverflow.com/users/18936/bobince
-function escapeRegex(literal: string) {
-  return literal.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&')
-}
-
-export function findIndexInText(term: string, text: string) {
-  // This should find patterns like:
-  // HELLO SENTENCE http://google.com/ HELLO
-  // HELLO SENTENCE http://google.com HELLO
-  // http://google.com/ HELLO.
-  // http://google.com/.
-  const pattern = new RegExp(`\\b(${escapeRegex(term)})(?![/\\w])`, 'i')
-  const match = pattern.exec(text)
-  return match ? match.index : -1
-}

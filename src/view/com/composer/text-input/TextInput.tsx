@@ -27,10 +27,7 @@ import {cleanError} from 'lib/strings/errors'
 import {getMentionAt, insertMentionAt} from 'lib/strings/mention-manip'
 import {useTheme} from 'lib/ThemeContext'
 import {isIOS} from 'platform/detection'
-import {
-  addLinkCardIfNecessary,
-  findIndexInText,
-} from 'view/com/composer/text-input/text-input-util'
+import {addLinkCardIfNecessary} from 'view/com/composer/text-input/text-input-util'
 import {Text} from 'view/com/util/text/Text'
 import {Autocomplete} from './mobile/Autocomplete'
 
@@ -112,10 +109,12 @@ export const TextInput = forwardRef(function TextInputImpl(
           setAutocompletePrefix('')
         }
 
+        const seenUris = new Set()
         if (newRt.facets) {
           for (const facet of newRt.facets) {
             for (const feature of facet.features) {
               if (AppBskyRichtextFacet.isLink(feature)) {
+                seenUris.add(feature.uri)
                 if (isUriImage(feature.uri)) {
                   const res = await downloadAndResize({
                     uri: feature.uri,
@@ -148,7 +147,7 @@ export const TextInput = forwardRef(function TextInputImpl(
         }
 
         for (const uri of prevAddedLinks.current.keys()) {
-          if (findIndexInText(uri, newText) === -1) {
+          if (!seenUris.has(uri)) {
             prevAddedLinks.current.delete(uri)
           }
         }
