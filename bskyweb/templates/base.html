@@ -131,6 +131,12 @@
       text-decoration: none;
     }
 
+    /* Remove svg outline on focus */
+    svg:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5); /* for cases of keyboard tabs */
+    }
+
     /* Styling hacks */
     *[data-word-wrap] {
       word-break: break-word;
